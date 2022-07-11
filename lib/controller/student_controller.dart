@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -5,9 +6,10 @@ import 'package:students_app/model/student_model.dart';
 
 class StudentController extends GetxController {
   final studentBox = Hive.box<Student>(boxName);
+
   String? imagePath;
   XFile? xFile;
-  //
+
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*List*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
   RxList<Student> studentsList = <Student>[].obs;
 
@@ -37,6 +39,7 @@ class StudentController extends GetxController {
   @override
   void onInit() {
     getStudents();
+
     super.onInit();
   }
 
@@ -44,7 +47,9 @@ class StudentController extends GetxController {
   final ImagePicker imagePicker = ImagePicker();
   Future pickImage() async {
     xFile = await imagePicker.pickImage(source: ImageSource.gallery);
-    if (xFile == null) return;
+    if (xFile == null) {
+      return;
+    }
     imagePath = xFile!.path;
     update();
   }

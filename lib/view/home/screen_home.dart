@@ -31,13 +31,13 @@ class HomeScreen extends StatelessWidget {
 
           //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Student_List*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
           StudentListWidget(),
-          kHeight10,
+          //kHeight10,
         ],
       ),
 
       //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Floating_Action_Button*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(right: 10),
+        padding: const EdgeInsets.only(right: 0,bottom: 10),
         child: CustomButton(
           icon: Icons.search,
           onTap: () => showSearch(context: context, delegate: StudentSearch()),

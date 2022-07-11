@@ -23,16 +23,19 @@ class TextFormFieldWidget extends StatelessWidget {
       autocorrect: true,
       validator: validator,
       controller: controller,
-      
       maxLength: name == "Mobile No" ? 10 : null,
       decoration: InputDecoration(
         labelText: name,
         prefixIcon: Icon(prefixIcon),
-        prefixText: name == "Mobile No" ? '+91' : null ,
-        // && name == "Batch"?'BCE ':null,
+        prefixText: name == "Mobile No"
+            ? '+91'
+            : name == "Batch"
+                ? 'BCE - '
+                : null,
+        suffixText: name == "Email" ? '@gmail.com            ' : null,
         prefixIconColor: kGrey,
         counterText: "",
-        labelStyle:const TextStyle(color: kGrey),
+        labelStyle: const TextStyle(color: kGrey),
       ),
       textCapitalization: TextCapitalization.words,
       keyboardType: keyboardType,

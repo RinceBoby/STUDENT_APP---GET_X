@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:students_app/controller/student_controller.dart';
 import 'package:students_app/core/colors.dart';
 import 'package:students_app/core/constants.dart';
@@ -34,15 +33,6 @@ class StudentDetails extends StatelessWidget {
       body: GetBuilder<StudentController>(
         init: StudentController(),
         builder: (controller) {
-          // Student? student;
-          // try {
-          //   student = box.getAt(index);
-          // } catch (e) {
-          //   return const Center(
-          //     child: CircularProgressIndicator(),
-          //   );
-          // }
-
           return Column(
             children: [
               kHeight40,
@@ -157,13 +147,13 @@ class StudentDetails extends StatelessWidget {
                                 text:
                                     "${studentView.firstName} ${studentView.lastName} ",
                               ),
-                              DetailsTextWidget(text: studentView.batch),
+                              DetailsTextWidget(text: "BCE - ${studentView.batch}"),
                               DetailsTextWidget(
                                   text: studentView.age.toString()),
                               DetailsTextWidget(
-                                  text: studentView.mobile.toString()),
+                                  text: "+91${studentView.mobile}"),
                               DetailsTextWidget(
-                                text: studentView.email,
+                                text: "${studentView.email}@gmail.com",
                               ),
                             ],
                           ),
@@ -185,7 +175,7 @@ class StudentDetails extends StatelessWidget {
                       icon: Icons.edit_rounded,
                       text: " Edit",
                       onTap: () => Get.to(
-                        EntryForm(
+                        () => EntryForm(
                           index: index,
                           isEditing: true,
                           student: studentView,

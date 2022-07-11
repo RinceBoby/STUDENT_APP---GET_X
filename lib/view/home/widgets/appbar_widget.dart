@@ -40,7 +40,7 @@ class AppBarWidget extends StatelessWidget {
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Add_Student*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
         CustomButton(
           icon: CupertinoIcons.person_badge_plus,
-          onTap: () => Get.to(EntryForm()),
+          onTap: () => Get.to(() => EntryForm()),
         ),
       ],
     );

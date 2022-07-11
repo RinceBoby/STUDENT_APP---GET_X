@@ -93,7 +93,8 @@ class StudentListWidget extends StatelessWidget {
                                 : CircleAvatar(
                                     radius: 30,
                                     backgroundImage: FileImage(
-                                        File(studentLst.image.toString())),
+                                      File(studentLst.image.toString()),
+                                    ),
                                   ),
                           ),
                         ),
@@ -117,7 +118,7 @@ class StudentListWidget extends StatelessWidget {
 
                             //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Batch_Name*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
                             NeumorphicText(
-                              studentLst.batch,
+                              "BCE - ${studentLst.batch}",
                               style: const NeumorphicStyle(
                                 depth: 10,
                                 intensity: 0.8,
@@ -134,7 +135,7 @@ class StudentListWidget extends StatelessWidget {
                         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Go_To_Details*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
                         CustomButton(
                           icon: CupertinoIcons.forward,
-                          onTap: () => Get.to(StudentDetails(index: index)),
+                          onTap: () => Get.to(()=>StudentDetails(index: index)),
                         ),
                       ],
                     ),

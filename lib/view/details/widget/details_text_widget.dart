@@ -15,16 +15,13 @@ class DetailsTextWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: NeumorphicText(
         text,
-        
         style: const NeumorphicStyle(
           depth: 10,
           intensity: 0.8,
           color: kGrey,
-           
         ),
         textStyle: NeumorphicTextStyle(
           fontSize: 18,
-            
           fontWeight: FontWeight.bold,
         ),
       ),
