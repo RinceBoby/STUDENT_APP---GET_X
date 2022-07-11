@@ -12,9 +12,9 @@ import '../widgets/cutsom_buttons.dart';
 
 final studentBox = Hive.box<Student>(boxName);
 List<Student> studentList = studentBox.values.toList();
-List<String> allStudents = [""];
 
 class StudentSearch extends SearchDelegate {
+  //
   @override
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -66,7 +66,7 @@ class StudentSearch extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     return Center(
       child: NeumorphicText(
-        "$query not found!",
+        query,
         style: const NeumorphicStyle(
           depth: 10,
           intensity: 0.8,
@@ -83,7 +83,6 @@ class StudentSearch extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    int index;
     final studentSearch = query.isEmpty
         ? studentList
         : studentList

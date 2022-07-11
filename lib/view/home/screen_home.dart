@@ -40,9 +40,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.only(right: 10),
         child: CustomButton(
           icon: Icons.search,
-          onTap: () {
-            showSearch(context: context, delegate: StudentSearch());
-          },
+          onTap: () => showSearch(context: context, delegate: StudentSearch()),
         ),
       ),
     );

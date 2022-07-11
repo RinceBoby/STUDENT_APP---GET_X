@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:get/get.dart';
+import 'package:students_app/controller/student_controller.dart';
 import 'package:students_app/model/student_model.dart';
 import 'package:students_app/view/details/student_details.dart';
 
@@ -16,18 +17,17 @@ class StudentListWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Box*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
-  Box<Student> studentBox = Hive.box<Student>(boxName);
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Controller*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+  StudentController studentController = Get.put(StudentController());
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       //
-      //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Valuelistenable_Builder*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
-      child: ValueListenableBuilder<Box<Student>>(
-        valueListenable: studentBox.listenable(),
-        builder: (context, Box<Student> box, _) {
-          if (box.values.isEmpty) {
+      //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Controller*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+      child: Obx(
+        () {
+          if (studentController.studentsList.isEmpty) {
             return Center(
               child: NeumorphicText(
                 "No Students Added !",
@@ -49,9 +49,9 @@ class StudentListWidget extends StatelessWidget {
             return ListView.separated(
               shrinkWrap: true,
               separatorBuilder: (context, index) => kHeight20,
-              itemCount: box.length,
+              itemCount: studentController.studentsList.length,
               itemBuilder: (context, index) {
-                Student? student = box.getAt(index);
+                Student studentLst = studentController.studentsList[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Neumorphic(
@@ -84,8 +84,8 @@ class StudentListWidget extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(3.0),
-                            child: student!.image == null
-                                ?const CircleAvatar(
+                            child: studentLst.image == null
+                                ? const CircleAvatar(
                                     radius: 30,
                                     backgroundImage: AssetImage(
                                         "assets/images/profileVector.jpg"),
@@ -93,7 +93,7 @@ class StudentListWidget extends StatelessWidget {
                                 : CircleAvatar(
                                     radius: 30,
                                     backgroundImage: FileImage(
-                                        File(student.image.toString())),
+                                        File(studentLst.image.toString())),
                                   ),
                           ),
                         ),
@@ -103,7 +103,7 @@ class StudentListWidget extends StatelessWidget {
                             //
                             //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Student_Name*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
                             NeumorphicText(
-                              "${student.firstName} ${student.lastName}",
+                              "${studentLst.firstName} ${studentLst.lastName}",
                               style: const NeumorphicStyle(
                                 depth: 10,
                                 intensity: 0.8,
@@ -117,7 +117,7 @@ class StudentListWidget extends StatelessWidget {
 
                             //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Batch_Name*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
                             NeumorphicText(
-                              student.batch,
+                              studentLst.batch,
                               style: const NeumorphicStyle(
                                 depth: 10,
                                 intensity: 0.8,
@@ -134,16 +134,7 @@ class StudentListWidget extends StatelessWidget {
                         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Go_To_Details*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
                         CustomButton(
                           icon: CupertinoIcons.forward,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => StudentDetails(
-                                  index: index,
-                                ),
-                              ),
-                            );
-                          },
+                          onTap: () => Get.to(StudentDetails(index: index)),
                         ),
                       ],
                     ),

@@ -28,7 +28,8 @@ class TextFormFieldWidget extends StatelessWidget {
       decoration: InputDecoration(
         labelText: name,
         prefixIcon: Icon(prefixIcon),
-        prefixText: name == "Mobile No" ? '+91' : null,
+        prefixText: name == "Mobile No" ? '+91' : null ,
+        // && name == "Batch"?'BCE ':null,
         prefixIconColor: kGrey,
         counterText: "",
         labelStyle:const TextStyle(color: kGrey),

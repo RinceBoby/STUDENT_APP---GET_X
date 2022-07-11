@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:students_app/controller/student_controller.dart';
 import 'package:students_app/core/colors.dart';
 import 'package:students_app/core/constants.dart';
 import 'package:students_app/model/student_model.dart';
@@ -21,23 +23,25 @@ class StudentDetails extends StatelessWidget {
 
   int index;
 
-  Box<Student> studentBox = Hive.box<Student>(boxName);
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Controller*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+  StudentController studentController = Get.put(StudentController());
 
   @override
   Widget build(BuildContext context) {
+    Student studentView = studentController.studentsList[index];
     return Scaffold(
       backgroundColor: kBgColor,
-      body: ValueListenableBuilder<Box<Student>>(
-        valueListenable: studentBox.listenable(),
-        builder: (context, Box<Student> box, _) {
-          Student? student;
-          try {
-            student = box.getAt(index);
-          } catch (e) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+      body: GetBuilder<StudentController>(
+        init: StudentController(),
+        builder: (controller) {
+          // Student? student;
+          // try {
+          //   student = box.getAt(index);
+          // } catch (e) {
+          //   return const Center(
+          //     child: CircularProgressIndicator(),
+          //   );
+          // }
 
           return Column(
             children: [
@@ -49,12 +53,10 @@ class StudentDetails extends StatelessWidget {
                   children: [
                     CustomButton(
                       icon: Icons.arrow_back_rounded,
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
+                      onTap: () => Get.back(),
                     ),
                     NeumorphicText(
-                      "${student!.firstName} ${student.lastName} ",
+                      "${studentView.firstName} ${studentView.lastName} ",
                       style: const NeumorphicStyle(
                         depth: 10,
                         intensity: 0.8,
@@ -88,7 +90,7 @@ class StudentDetails extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: student.image == null
+                  child: studentView.image == null
                       ? const CircleAvatar(
                           radius: 120,
                           backgroundImage:
@@ -98,7 +100,7 @@ class StudentDetails extends StatelessWidget {
                           radius: 120,
                           backgroundImage: FileImage(
                             File(
-                              student.image.toString(),
+                              studentView.image.toString(),
                             ),
                           ),
                         ),
@@ -125,7 +127,7 @@ class StudentDetails extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(10),
 
-                      //<<<<<Student_Details>>>>>//
+                      //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Student_Details>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -153,14 +155,15 @@ class StudentDetails extends StatelessWidget {
                             children: [
                               DetailsTextWidget(
                                 text:
-                                    "${student.firstName} ${student.lastName} ",
+                                    "${studentView.firstName} ${studentView.lastName} ",
                               ),
-                              DetailsTextWidget(text: student.batch),
-                              DetailsTextWidget(text: student.age.toString()),
+                              DetailsTextWidget(text: studentView.batch),
                               DetailsTextWidget(
-                                  text: student.mobile.toString()),
+                                  text: studentView.age.toString()),
                               DetailsTextWidget(
-                                text: student.email,
+                                  text: studentView.mobile.toString()),
+                              DetailsTextWidget(
+                                text: studentView.email,
                               ),
                             ],
                           ),
@@ -181,18 +184,13 @@ class StudentDetails extends StatelessWidget {
                     child: TextButtonWidget(
                       icon: Icons.edit_rounded,
                       text: " Edit",
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EntryForm(
-                              index: index,
-                              isEditing: true,
-                              student: student,
-                            ),
-                          ),
-                        );
-                      },
+                      onTap: () => Get.to(
+                        EntryForm(
+                          index: index,
+                          isEditing: true,
+                          student: studentView,
+                        ),
+                      ),
                     ),
                   ),
 
@@ -205,7 +203,7 @@ class StudentDetails extends StatelessWidget {
                       onTap: () {
                         //
                         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Delete_Function*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
-                        studentBox.deleteAt(index);
+                        studentController.deleteStudent(index);
 
                         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Snackbar*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -230,7 +228,7 @@ class StudentDetails extends StatelessWidget {
                             elevation: 6.0,
                           ),
                         );
-                        Navigator.pop(context);
+                        Get.back();
                       },
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:get/get.dart';
 import 'package:students_app/core/colors.dart';
 import 'package:students_app/view/form/entry_form.dart';
 
@@ -19,7 +20,7 @@ class AppBarWidget extends StatelessWidget {
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Log_Out*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
         CustomButton(
           icon: CupertinoIcons.reply,
-          onTap: ()=>Navigator.pop(context),
+          onTap: () => Navigator.pop(context),
         ),
 
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Title*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
@@ -39,12 +40,7 @@ class AppBarWidget extends StatelessWidget {
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Add_Student*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
         CustomButton(
           icon: CupertinoIcons.person_badge_plus,
-          onTap:()=> Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EntryForm(),
-            ),
-          ),
+          onTap: () => Get.to(EntryForm()),
         ),
       ],
     );
