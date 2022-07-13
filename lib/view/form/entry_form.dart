@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:students_app/controller/student_controller.dart';
 import 'package:students_app/core/constants.dart';
 import 'package:students_app/view/widgets/capitalise.dart';
@@ -98,6 +97,43 @@ class EntryForm extends StatelessWidget {
       ),
     );
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 //======================================================================================================================//
 //=======================================================>METHOD<=======================================================//
 //======================================================================================================================//

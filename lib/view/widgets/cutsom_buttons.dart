@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Neumorphic(
-      padding: const EdgeInsets.all(2),
+      padding: const EdgeInsets.all(1),
       style: const NeumorphicStyle(
         color: Color(0xFFDCE5F6),
         depth: 10,
@@ -25,7 +25,7 @@ class CustomButton extends StatelessWidget {
       child: NeumorphicButton(
         minDistance: -10,
         onPressed: () {},
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(5),
         style: const NeumorphicStyle(
           color: Color(0xFFE3ECFD),
           depth: 10,
@@ -33,12 +33,10 @@ class CustomButton extends StatelessWidget {
           shape: NeumorphicShape.convex,
           boxShape: NeumorphicBoxShape.circle(),
         ),
-        child: InkWell(
-          onTap: onTap,
-          child: Icon(
-            icon,
-            color: kGrey,
-          ),
+        child: IconButton(
+          onPressed: onTap,
+          icon: Icon(icon),
+          color: kGrey,
         ),
       ),
     );

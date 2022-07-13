@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
 
       //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Floating_Action_Button*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(right: 0,bottom: 10),
+        padding: const EdgeInsets.only(right: 10, bottom: 40),
         child: CustomButton(
           icon: Icons.search,
           onTap: () => showSearch(context: context, delegate: StudentSearch()),
