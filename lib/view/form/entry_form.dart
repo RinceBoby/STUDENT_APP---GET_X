@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:students_app/controller/student_controller.dart';
 import 'package:students_app/core/constants.dart';
 import 'package:students_app/view/widgets/capitalise.dart';
@@ -107,6 +108,14 @@ class EntryForm extends StatelessWidget {
         kHeight20,
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Student_Image*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
         GetBuilder<StudentController>(
+          initState: (state) {
+            if (isEditing) {
+              studentController.imagePath = student!.image;
+            }
+          },
+          dispose: (_) {
+            // studentController.imagePath = null;
+          },
           builder: (controller) {
             return Stack(
               children: [
@@ -132,12 +141,12 @@ class EntryForm extends StatelessWidget {
                         : CircleAvatar(
                             radius: 80,
                             backgroundImage: FileImage(
-                              File(controller.imagePath.toString()),
+                              File(controller.imagePath!),
                             ),
                           ),
                   ),
                 ),
-                //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Camera_Button*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+                //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Camera_Button*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
                 Positioned(
                   left: 120,
@@ -188,7 +197,6 @@ class EntryForm extends StatelessWidget {
                   mobileController.text = student!.mobile.toString();
                   ageController.text = student!.age.toString();
                   emailController.text = student!.email;
-                  studentController.imagePath = student!.image;
                 }
               },
               builder: (controller) {
@@ -451,6 +459,8 @@ class EntryForm extends StatelessWidget {
                           );
                           Get.back();
                         }
+                        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Keyboard_Down>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+                        FocusScope.of(context).unfocus();
                       },
                     ),
                   ],

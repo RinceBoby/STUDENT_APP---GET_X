@@ -218,9 +218,10 @@ class StudentSearch extends SearchDelegate {
                                     MaterialPageRoute(
                                       builder: (context) => StudentDetails(
                                         index: studentList.indexWhere(
-                                            (element) =>
-                                                element.firstName ==
-                                                studentSearch[index].firstName),
+                                          (element) =>
+                                              element.firstName ==
+                                              studentSearch[index].firstName,
+                                        ),
                                       ),
                                     ),
                                   );

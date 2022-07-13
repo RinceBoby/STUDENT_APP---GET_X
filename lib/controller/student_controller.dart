@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -39,7 +38,6 @@ class StudentController extends GetxController {
   @override
   void onInit() {
     getStudents();
-
     super.onInit();
   }
 

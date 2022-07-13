@@ -27,12 +27,11 @@ class StudentDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Student studentView = studentController.studentsList[index];
     return Scaffold(
       backgroundColor: kBgColor,
-      body: GetBuilder<StudentController>(
-        init: StudentController(),
-        builder: (controller) {
+      body: Obx(
+        () {
+          Student studentView = studentController.studentsList[index];
           return Column(
             children: [
               kHeight40,
@@ -147,7 +146,8 @@ class StudentDetails extends StatelessWidget {
                                 text:
                                     "${studentView.firstName} ${studentView.lastName} ",
                               ),
-                              DetailsTextWidget(text: "BCE - ${studentView.batch}"),
+                              DetailsTextWidget(
+                                  text: "BCE - ${studentView.batch}"),
                               DetailsTextWidget(
                                   text: studentView.age.toString()),
                               DetailsTextWidget(
