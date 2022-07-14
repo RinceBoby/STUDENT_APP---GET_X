@@ -31,7 +31,6 @@ class HomeScreen extends StatelessWidget {
 
           //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Student_List*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
           StudentListWidget(),
-          //kHeight10,
         ],
       ),
 

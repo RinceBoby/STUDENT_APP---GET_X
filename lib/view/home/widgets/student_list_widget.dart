@@ -22,31 +22,29 @@ class StudentListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      //
-      //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Controller*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
-      child: Obx(
-        () {
-          if (studentController.studentsList.isEmpty) {
-            return Center(
-              child: NeumorphicText(
-                "No Students Added !",
-                style: const NeumorphicStyle(
-                  depth: 10,
-                  intensity: 0.8,
-                  color: kGrey,
-                ),
-                textStyle: NeumorphicTextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                ),
+    return Obx(
+      () {
+        if (studentController.studentsList.isEmpty) {
+          return Center(
+            child: NeumorphicText(
+              "No Students Added !",
+              style: const NeumorphicStyle(
+                depth: 10,
+                intensity: 0.8,
+                color: kGrey,
               ),
-            );
-          } else {
-            //
-            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Student_List_View*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
-            return ListView.separated(
+              textStyle: NeumorphicTextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1,
+              ),
+            ),
+          );
+        } else {
+          //
+          //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Student_List_View*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+          return Expanded(
+            child: ListView.separated(
               shrinkWrap: true,
               separatorBuilder: (context, index) => kHeight20,
               itemCount: studentController.studentsList.length,
@@ -98,7 +96,7 @@ class StudentListWidget extends StatelessWidget {
                                   ),
                           ),
                         ),
-
+          
                         Column(
                           children: [
                             //
@@ -115,7 +113,7 @@ class StudentListWidget extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-
+          
                             //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Batch_Name*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
                             NeumorphicText(
                               "BCE - ${studentLst.batch}",
@@ -131,7 +129,7 @@ class StudentListWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-
+          
                         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*Go_To_Details*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
                         CustomButton(
                           icon: CupertinoIcons.forward,
@@ -142,10 +140,10 @@ class StudentListWidget extends StatelessWidget {
                   ),
                 );
               },
-            );
-          }
-        },
-      ),
+            ),
+          );
+        }
+      },
     );
   }
 }
